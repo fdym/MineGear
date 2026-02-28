@@ -1,7 +1,7 @@
 name: Clone android.git
 
 on:
-  workflow_call:
+  workflow_dispatch:
     inputs:
       tag:
         description: 'tag, such as idea/2025.3.2'
