@@ -1,0 +1,24 @@
+name: Clone android.git
+
+on:
+  workflow_call:
+    inputs:
+      tag:
+        description: 'tag, such as idea/2025.3.2'
+        type: string
+        required: true
+
+jobs:
+  clone:
+    runs-on: ubuntu-latest
+    name: Clone android.git
+    steps:
+      - name: Clone android.git
+        run: |
+          git clone git://git.jetbrains.org/idea/android.git android -b ${{inputs.tag}}
+          7z a $GITHUB_WORKSPACE/android.zip $GITHUB_WORKSPACE/android/
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: android.zip
+          path: ${{ github.workspace }}/android.zip
